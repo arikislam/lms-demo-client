@@ -1,0 +1,163 @@
+// import files
+@import '../mixins/button';
+
+
+// button color control
+@each $parent, $color in $theme-colors {
+	@include button-emphasis-variant('.button__#{$parent}', $color);
+}
+
+.button {
+	text-align: center;
+	padding: 12px 27.5px;
+	line-height: 1;
+	color: $grey;
+	background: $white;
+	border: 1px solid $grey;
+	font-size: 1.4rem;
+	font-weight: 500;
+	// text-transform: uppercase;
+	font-family: $bodyFont;
+	border-radius: 8px;
+	@include respond-below(sm) {
+		// font-size: 1.4rem;
+		// padding: 13.5px 30px;
+	}
+	&:hover {
+		background: $themeColor;
+		color: $white;
+		border-color: $themeColor;
+	}
+	.sv-icon {
+		// font-size: 1.4rem;
+		margin-right: 5px;
+	}
+	&.button__block {
+		width: 100%;
+	}
+	&.icon__button {
+		height: 40px;
+		width: 40px;
+		min-width: 40px;
+		padding: 0;
+		line-height: 46px;
+		.sv-icon {
+			margin-right: 0;
+			font-size: 2rem;
+		}
+	}
+	&.icon__button--sm {
+		height: 30px;
+		width: 30px;
+		min-width: 30px;
+		padding: 0;
+		line-height: 30px;
+		.sv-icon {
+			margin-right: 0;
+			font-size: 1.2rem;
+		}
+	}
+}
+
+.add__button {
+	padding: 5px;
+	font-size: 1.4rem;
+	font-weight: 500;
+	border-radius: 8px;
+	.icon {
+		height: 30px;
+		width: 30px;
+		line-height: 30px;
+		text-align: center;
+		display: inline-block;
+		border-radius: 8px;
+	}
+	.text {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+}
+
+button.button {
+	cursor: pointer;
+	@include transition();
+}
+
+.button--lg {
+	padding: 20px 30px;
+}
+.button--md {
+	padding: 12px 20px;
+	font-size: 1.4rem;
+}
+.button--xs {
+	padding: 6px 10px;
+	font-size: 1.2rem;
+}
+.button__flex {
+	display: inline-flex;
+	align-items: center;
+}
+
+.button__group {
+	.button {
+		margin-right: 13px;
+		margin-bottom: 15px;
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+	&.justify__between {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+}
+
+.radius-10 {
+	border-radius: 10px;
+}
+.radius-15 {
+	border-radius: 15px;
+}
+.radius-20 {
+	border-radius: 20px;
+}
+.radius-50 {
+	border-radius: 50px;
+}
+
+
+// Label color control
+@each $parent, $color in $theme-colors {
+	@include label-emphasis-variant('.label__#{$parent}', $color);
+}
+
+.text__label {
+	font-size: 1.4rem;
+	font-weight: 400;
+	// display: inline-block;
+	height: 40px;
+	width: 40px;
+	border-radius: 8px;
+	text-align: center;
+	line-height: 40px;
+	text-transform: uppercase;
+}
+
+.badge {
+	@include fontStyle(1.4rem, 500);
+	padding: 3.5px 20px;
+	border-radius: 20px;
+	display: inline-block;
+	@include respond-below(md) {
+		font-size: 1.2rem;
+		padding: 3px 12px;
+	}
+}
+
+// badge color control
+@each $parent, $color in $theme-colors {
+	@include badge-emphasis-variant('.badge__#{$parent}', $color);
+}
+

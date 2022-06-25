@@ -1,0 +1,39 @@
+
+.dataTables_paginate,
+.pagination {
+    .pagination__list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        .pagination__item {
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
+            .paginate_button,
+            .pagination__link {
+                height: 32px;
+                width: 32px;
+                border-radius: 8px;
+                background: $white;
+                border: 1px solid rgba($grey, .3);
+                text-align: center;
+                line-height: 32px;
+                display: inline-block;
+                color: rgba($grey, .3);
+                font-size: 1.4rem;
+                &.active,
+                &.active:hover {
+                    background: $white;
+                    color: $themeColor;
+                    border-color: $themeColor;
+                }
+                &:hover {
+                    color: $white;
+                    background: $themeColor;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,112 @@
+
+
+.selected__supplier {
+    margin-bottom: 30px;
+    p {
+        @include fontStyle(1.4rem, 400, $grey);
+        span {
+            color: $dark;
+        }
+    }
+    .choose__supplier {
+        margin-top: 15px;
+        font-size: 1.4rem;
+        text-decoration: underline;
+        color: $themeColor;
+        .icon__button {
+            display: inline-block;
+            transition: all .3s ease;
+            margin-left: 20px;
+        }
+    }
+}
+
+.filter__item {
+    display: flex;
+    align-items: flex-end;
+    .sv-select {
+        flex: 0 1 200px;
+        margin-right: 20px;
+    }
+    .input__group {
+        flex: 0 1 400px;
+        margin-right: auto;
+    }
+    .add__button {
+        flex: 0 0 132px;
+        margin-left: auto;
+    }
+}
+
+.extra__charge__block {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    .extra__charge__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .charge__info {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: 0;
+        display: flex;
+        align-items: center;
+        .sv-select {
+            flex: 0 0 270px;
+            margin-right: auto;
+        }
+        .form__control[type="text"] {
+            max-width: 120px;
+            background: $grey4;
+            border: 0;
+            margin-right: 10px;
+        }
+    }
+}
+
+.purchase__footer {
+    margin-bottom: 30px;
+    border-radius: 10px;
+    .total__items {
+        padding: var(--padding-30);
+        border-bottom: 1px solid rgba($black, .08);
+        .total__list {
+            display: flex;
+            justify-content: flex-end;
+            &:not(:last-child) {
+                margin-bottom: 4px;
+            }
+            .title {
+                flex: 0 1 300px;
+                font-size: 1.4rem;
+                text-align: right;
+            }
+            .amount {
+                flex: 0 0 120px;
+                text-align: right;
+                font-size: 1.4rem;
+            }
+        }
+    }
+    .final__amount {
+        display: flex;
+        justify-content: flex-end;
+        padding: var(--padding-30);
+        padding-top: 10px;
+        padding-bottom: 10px;
+        .title {
+            flex: 0 1 300px;
+            font-size: 1.6rem;
+            text-align: right;
+        }
+        .amount {
+            flex: 0 0 120px;
+            text-align: right;
+            font-size: 1.4rem;
+            color: $themeColor;
+            font-weight: 600;
+        }
+    }
+}

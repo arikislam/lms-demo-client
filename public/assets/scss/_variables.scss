@@ -1,0 +1,72 @@
+:root{
+	--padding-30: 30px;
+	--padding-40: 40px;
+	--padding-50: 50px;
+	--padding-100: 100px;
+
+	--h2-fontsize: 36px;
+	--h3-fontsize: 30px;
+	--h4-fontsize: 26px;
+	--h5-fontsize: 22px;
+	--h6-fontsize: 18px;
+
+	--gutter-50: 50px;
+	--gutter-30: 30px;
+	--gutter-25: 25px;
+	@include respond-below(xxl){
+		--padding-50: 25px;
+		--padding-100: 25px;
+	}
+	@include respond-below(xl){
+		
+	}
+    @include respond-below(lg){
+		
+    }
+    @include respond-below(md){
+		
+    }
+}
+
+// Fonts
+$bodyFont: 'DM Sans', sans-serif;
+
+// color
+$themeColor:#464DEB !default;
+$primary:	#15A15E !default;
+$danger: 	#FE494C !default;
+$warning: 	#F8981D !default;
+$purple: 	#913E98 !default;
+$green: 	#8AC44B !default;
+$white: 	#ffffff !default;
+$black: 	#000000 !default;
+$dark: 		#132144 !default;
+$grey4: 	#F2F7FF !default;
+$fontColor: #6B7280;
+$dark2: 	#161C2F;
+$grey: 		#8C93AA;
+$grey2: 	#DCE2EC;
+$grey3: 	#CBCFDA;
+$grey5:		#E6EBFB;
+$themeDark: #343AD6;
+
+// $template-color: #E6EBFB;
+
+
+// theme-color
+$theme-colors: () !default;
+$theme-colors: map-merge(
+	(
+		'themeColor': $themeColor,
+		'primary': $primary,
+		'danger': $danger,
+		'warning': $warning,
+		'purple': $purple,
+		'green': $green,
+		'white': $white,
+		'black': $black,
+		'dark': $dark,
+		'grey4': $grey4,
+	),
+	$theme-colors
+);

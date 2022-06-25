@@ -1,0 +1,112 @@
+// Button design 
+@mixin button-emphasis-variant($parent, $color) {
+	#{$parent} {
+		&:not(.hover__highlight){
+			background: $color;
+			color: set-button-color($color);
+			border-color: $color;
+			@include transition;
+			@include transition-properties(background, color, box-shadow, border);
+			&:disabled{
+				cursor: not-allowed;
+				background: $danger;
+				border-color: $danger;
+			}
+			.sv-icon{
+				// color: $color;
+				// background: set-button-color($color);
+			}
+		}
+		&.back__button {
+			position: relative;
+			padding: 12px 13px;
+			color: $color;
+			border-color: transparent;
+			background: rgba($color, .1);
+			&:hover {
+				color: $color;
+				border-color: transparent;
+				background: rgba($color, .1);
+			}
+			&:before {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 40px;
+				border: 1px solid rgba($color, .1);
+				content: '';
+				border-top-left-radius: 8px;
+				border-bottom-left-radius: 8px;
+			}
+			.sv-icon {
+				margin-right: 20px;
+			}
+		}
+		&.hover__highlight{
+			color: $color;
+			border-color: transparent;
+			background: rgba($color, .1);
+			.sv-icon{
+				// background: $primary;
+				// color: $white;
+			}
+			&:hover {
+				border-color: transparent;
+			}
+		}
+		&.add__button {
+			.icon {
+				background: $color;
+				color: $white;
+				font-size: 1.2rem;
+			}
+		}
+	}
+
+	a#{$parent},
+	button#{$parent} {
+		&.active,
+		&:hover {
+			&:disabled{
+				cursor: not-allowed;
+				background: $danger;
+				box-shadow: none;
+			}
+			@if $color != #000000 {
+				background: darken($color, 5%) ;
+				color: set-button-color($color);
+				border-color: darken($color, 5%) ;
+				text-shadow: 0 1px 1px rgba(set-button-color($color), 0.3);
+			}
+		}
+		&.hover__highlight{
+			&:hover {
+				.sv-icon{
+					// background: set-button-color($color);
+					// color: $color;
+				}
+			}
+		}
+	}
+}
+
+
+// label design
+@mixin label-emphasis-variant($parent, $color) {
+	#{$parent} {
+		background: rgba($color, .1);
+		color: $color;
+		border-color: rgba($color, .1);
+		@include transition;
+		@include transition-properties(background, color, box-shadow, border);
+	}
+}
+
+// badge design
+@mixin badge-emphasis-variant($parent, $color) {
+	#{$parent} {
+		background: $color;
+		color: $white;
+	}
+}

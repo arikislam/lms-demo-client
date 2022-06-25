@@ -1,0 +1,1 @@
+export const EXCEPT_ROUTES = ['login', 'forget-password', 'reset-password'];

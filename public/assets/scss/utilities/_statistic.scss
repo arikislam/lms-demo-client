@@ -1,0 +1,89 @@
+
+.statistic {
+    background: $white;
+    border-radius: 15px;
+    box-shadow: 0px 5px 20px rgba($dark, 0.05);
+    padding: 20px;
+    height: 100%;
+    .statistic__main {
+        // flex-wrap: wrap;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @include respond-below(xl) {
+            display: block;
+        }
+    }
+    &--income {
+        .icon {
+            background: rgba($themeColor, .1);
+            color: $themeColor;
+        }
+    }
+    &--expense {
+        .icon {
+            background: rgba($primary, .1);
+            color: $primary;
+        }
+    }
+    &--cash {
+        .icon {
+            background: rgba($warning, .1);
+            color: $warning;
+        }
+    }
+    &--total {
+        .icon {
+            background: rgba($purple, .1);
+            color: $purple;
+        }
+    }
+    .icon {
+        height: 50px;
+        flex: 0 0 50px;
+        min-width: 50px;
+        border-radius: 50%;
+        text-align: center;
+        margin-right: 15px;
+        @include respond-below(xl) {
+            width: 50px;
+            margin-bottom: 15px;
+        }
+        i {
+            line-height: 50px;
+            font-size: 24px;
+        }
+    }
+    .statistic__content {
+        text-align: right;
+        flex: 1 1 auto;
+        @include respond-below(xl) {
+            text-align: left;
+        }
+        .title {
+            @include fontStyle(1.4rem, 400, $dark);
+        }
+        h3 {
+            @include fontStyle(var(--h5-fontsize), 700, $dark);
+        }
+    }
+    .payment__status {
+        @include fontStyle(1.4rem);
+        flex: 1 1 100%;
+        margin-top: 5px;
+        text-align: right;
+        @include respond-below(xl) {
+            text-align: left;
+        }
+        &.receivable {
+            span {
+                color: $themeColor;
+            }
+        }
+        &.payable {
+            span {
+                color: $primary;
+            }
+        }
+    }
+}

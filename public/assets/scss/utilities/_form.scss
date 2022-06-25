@@ -1,0 +1,323 @@
+
+
+.form__group {
+    margin-bottom: 15px;
+    font-size: 0;
+    * {
+        font-size: 1.4rem;
+    }
+    .sv-label {
+        display: block;
+        margin-bottom: 3px;
+    }
+    .add__field {
+        display: flex;
+        align-items: center;
+        > * {
+            &:not(:last-child) {
+                margin-right: 15px;
+            }
+        }
+        .icon__button i {
+            font-size: 1.6rem;
+        }
+    }
+    label + .add__field {
+        margin-top: 3px;
+    }
+}
+
+.form__control {
+    background: $white;
+    border: 1px solid $grey2;
+    border-radius: 8px;
+    height: 40px;
+    padding: 0 20px;
+    width: 100%;
+    @include fontStyle(1.4rem, 400, $dark);
+    @include placeholder {
+        color: $grey;
+    }
+    &--dark {
+        background: rgba($grey, .08);
+        border-color: transparent;
+        color: $grey;
+    }
+    &--sm {
+        height: 40px;
+    }
+}
+textarea.form__control {
+    height: 80px;
+    resize: none;
+    padding-top: 13px;
+    font-family: $bodyFont;
+}
+
+label {
+    font-size: 1.4rem;
+}
+
+label + .sv-select,
+label ~ .form__control {
+    margin-top: 3px;
+}
+
+.input__group {
+    position: relative;
+    .icon {
+        position: absolute;
+        top: 8px;
+        left: 15px;
+        color: $dark;
+        pointer-events: none;
+        font-size: 1.8rem;
+    }
+    .form__control {
+        padding-left: 40px;
+    }
+}
+
+.sv-select {
+    position: relative;
+    &:before {
+        content: "\e903";
+        font-family: 'sv-icon';
+        position: absolute;
+        bottom: 8px;
+        right: 15px;
+        pointer-events: none;
+        font-size: 1.4rem;
+        color: $grey3;
+    }
+    .form__control {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding-right: 40px;
+        &::before {
+            content: 'dhee';
+        }
+    }
+    &--dark {
+        .form__control {
+            background: rgba($grey, .08);
+            border-color: transparent;
+            color: $grey;
+        }
+    }
+    .form__control--sm {
+        & + .icon {
+            top: 9px;
+        }
+    }
+}
+
+.sv-checkbox {
+    position: relative;
+    // font-size: 0;
+    input {
+        display: none;
+        &:checked {
+            ~ span {
+                &::before {
+                    background: $themeColor;
+                }
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    span {
+        width: 15px;
+        display: inline-block;
+        &:before {
+            position: absolute;
+            top: 3px;
+            left: 0;
+            height: 15px;
+            width: 15px;
+            border: 1px solid rgba(140, 147, 170, 0.3);
+            border-radius: 2px;
+            background: $white;
+            content: '';
+            transition: all .3s ease;
+        }
+        &:after {
+            position: absolute;
+            top: 0;
+            left: 1px;
+            content: '\e907';
+            font-family: 'sv-icon';
+            font-size: 1.3rem;
+            color: $white;
+            opacity: 0;
+            transition: all .3s ease;
+        }
+    }
+    .label__text {
+        width: auto;
+        margin-left: 5px;
+    }
+}
+
+.sv-radio {
+    position: relative;
+    input {
+        display: none;
+        &:checked {
+            ~ span {
+                &::before {
+                    background: $themeColor;
+                }
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    span {
+        width: 15px;
+        display: inline-block;
+        &:before {
+            position: absolute;
+            top: 3px;
+            left: 0;
+            height: 15px;
+            width: 15px;
+            border: 1px solid rgba(140, 147, 170, 0.3);
+            border-radius: 2px;
+            background: $white;
+            content: '';
+            transition: all .3s ease;
+        }
+        &:after {
+            position: absolute;
+            top: 0;
+            left: 1px;
+            content: '\e907';
+            font-family: 'sv-icon';
+            font-size: 1.3rem;
+            color: $white;
+            opacity: 0;
+            transition: all .3s ease;
+        }
+    }
+    .label__text {
+        width: auto;
+        margin-left: 5px;
+    }
+}
+
+.sv-file-input {
+    display: inline-flex;
+    align-items: center;
+    input {
+        display: none;
+    }
+    .input__box {
+        height: 70px;
+        width: 70px;
+        border-radius: 8px;
+        border: 1px dashed rgba($themeColor, .3);
+        background: rgba($themeColor, .1);
+        margin-right: 20px;
+        position: relative;
+        &::before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            content: "\e90e";
+            font-family: 'sv-icon';
+            font-size: 26px;
+            color: $themeColor;
+        }
+    }
+    .input__text {
+        @include fontStyle(1.4rem, 400, $grey);
+    }
+}
+
+.access__form {
+    .button__white {
+        border-color: $themeColor;
+        color: $themeColor;
+        &:hover {
+            background: $themeColor;
+            color: $white;
+        }
+    }
+}
+
+.dash__form {
+    .dash__form__header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        .header__icon {
+            height: 40px;
+            width: 40px;
+            text-align: center;
+            border-radius: 10px;
+            background: rgba($themeColor, .1);
+            border: 1px solid rgba($themeColor, .3);
+            margin-right: 15px;
+            i {
+                color: $themeColor;
+                line-height: 40px;
+                font-size: 20px;
+            }
+        }
+        h3 {
+            font-size: var(--h5-fontsize);
+        }
+    }
+}
+
+.select__with__icon {
+    min-width: 150px;
+    background: rgba($themeColor, .05);
+    border-radius: 8px;
+    margin-bottom: 0;
+    .pre__icon {
+        position: absolute;
+        top: 11px;
+        left: 15px;
+        color: $themeColor;
+        pointer-events: none;
+        font-size: 1.4rem;
+    }
+    .form__control {
+        background: transparent;
+        border: 0;
+        padding-left: 40px;
+        // height: 40px;
+    }
+    .icon {
+        top: 9px;
+        right: 15px;
+    }
+}
+
+.role__block {
+    display: flex;
+    justify-content: space-between;
+    .sv-radio {
+        flex: 0 0 calc(50% - 10px);
+        background: $white;
+        border: 1px solid $grey2;
+        border-radius: 8px;
+        padding: 7.5px 15px;
+        span {
+            &:before {
+                top: 11px;
+                left: 15px;
+            }
+            &:after {
+                top: 8px;
+                left: 16px;
+            }
+        }
+    }
+}

@@ -1,0 +1,257 @@
+
+.sv-table__flat {
+    padding-bottom: 20px;
+    .table__row {
+        display: flex;
+        justify-content: space-between;
+        &:hover {
+            .table__col {
+                background: rgba($grey, .08);
+                p {
+                    color: $dark;
+                }
+            }
+        }
+        .table__col {
+            padding: 9px 5px;
+            transition: all .3s ease;
+            p {
+                @include fontStyle(1.4rem, 400, $grey);
+                transition: all .3s ease;
+            }
+            &:first-child {
+                padding-left: 30px;
+            }
+            &:last-child {
+                padding-right: 30px;
+            }
+            &.col__head {
+                background: rgba($grey, .08);
+                p {
+                    @include fontStyle(1.4rem, 400, $dark);
+                }
+            }
+            &.col__name {
+                flex: 1 1 150px;
+            }
+            &.col__amount {
+                flex: 1 1 100px;
+            }
+            &.col__date {
+                flex: 1 1 110px;
+            }
+            &.col__total {
+                flex: 1 1 120px;
+            }
+        }
+    }
+}
+
+.sv-table {
+    .table__row {
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        background: $white;
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+        &.row__head {
+            background: rgba($grey, .08);
+            border-radius: 5px;
+            .table__col {
+                p {
+                    @include fontStyle(1.4rem, 400, $dark);
+                }
+            }
+        }
+        .table__col {
+            padding: 9px 10px;
+            transition: all .3s ease;
+            .form__control {
+                max-width: 120px;
+                border: 0;
+                background: $grey5;
+            }
+            p, a {
+                @include fontStyle(1.4rem, 400, $dark);
+                transition: all .3s ease;
+                line-height: 1.4;
+                word-break: break-word;
+                i {
+                    color: $grey;
+                }
+                &.text__label {
+                    line-height: 40px;
+                    color: $themeColor;
+                }
+            }
+            &:first-child {
+                padding-left: 20px;
+            }
+            &:last-child {
+                padding-right: 20px;
+            }
+            &.add__col {
+                flex: 1 1 auto;
+            }
+            &.col__revenue__type,
+            &.col__inv__number,
+            &.col__product,
+            &.col__supplier,
+            &.col__customer,
+            &.col__attribute {
+                flex: 1 0 200px;
+            }
+            &.col__customer {
+                .table__customer {
+                    display: flex;
+                    align-items: center;
+                    .customer__thumb {
+                        height: 35px;
+                        width: 35px;
+                        min-width: 35px;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        margin-right: 15px;
+                        img {
+                            height: 100%;
+                            width: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                }
+            }
+            &.col__email,
+            &.col__value {
+                flex: 1 1 180px;
+            }
+            &.col__contact__person,
+            &.col__contact__person__phone,
+            &.col__phone {
+                flex: 1 1 180px;
+            }
+            &.col__description,
+            &.col__address {
+                flex: 1 1 220px;
+            }
+            &.col__purchase__p,
+            &.col__regular__p,
+            &.col__status,
+            &.col__total,
+            &.col__discount,
+            &.col__vat,
+            &.col__supplier,
+            &.col__date,
+            &.col__wholesell__price,
+            &.col__regular__price,
+            &.col__discounted__price,
+            &.col__qty,
+            &.col__sku,
+            &.col__amount,
+            &.col__category,
+            &.col__month,
+            &.col__due {
+                flex: 1 1 140px;
+            }
+            &.col__discount {
+                .sv-select {
+                    max-width: 100px;
+                    .form__control {
+                        width: 100%;
+                    }
+                }
+            }
+            &.col__action {
+                flex: 0 0 90px;
+                a {
+                    color: $grey;
+                    &:not(:last-child) {
+                        margin-right: 10px;
+                    }
+                    &.action__edit {
+                        &:hover {
+                            color: $primary;
+                        }
+                    }
+                    &.action__delete {
+                        &:hover {
+                            color: $danger;
+                        }
+                    }
+                }
+                .remove__product__button {
+                    color: $danger;
+                    &:hover {
+                        color: $white;
+                    }
+                }
+            }
+            .attribute__values {
+                display: flex;
+                .text__label {
+                    &:not(:last-child) {
+                        margin-right: 15px;
+                    }
+                }
+            }
+        }
+    }
+    &.item__table {
+        .table__row {
+            border-radius: 0;
+            background: transparent;
+            margin-bottom: 0;
+            &:not(.row__head):not(:last-child) {
+                border-bottom: 1px solid rgba($black, .08);
+            }
+            &:not(.row__head) {
+                background: $grey4;
+            }
+            &.row__head {
+                border-radius: 5px;
+                background: $grey5;
+                margin-bottom: 10px;
+            }
+            &:nth-child(2) {
+                border-top-right-radius: 10px;
+                border-top-left-radius: 10px;
+            }
+            &:last-child {
+                border-bottom-right-radius: 10px;
+                border-bottom-left-radius: 10px;
+            }
+            .table__col {
+                &.col__action {
+                    text-align: right;
+                    flex: 0 0 55px;
+                }
+                &.col__total {
+                    flex: 1 1 140px;
+                }
+                &.col__charge {
+                    flex: 1 1 150px;
+                    .sv-select {
+                        max-width: 200px;
+                        .form__control {
+                            max-width: 100%;
+                            background: $grey5;
+                        }
+                    }
+                }
+                &.col__extra {
+                    flex: 0 1 180px;
+                }
+            }
+        }
+    }
+    &.invoice__table {
+        .table__row {
+            .table__col {
+                &.col__action {
+                    flex: 0 0 105px;
+                }
+            }
+        }
+    }
+}

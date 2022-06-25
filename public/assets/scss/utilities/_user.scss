@@ -1,0 +1,27 @@
+
+.sv-tab {
+    margin-bottom: 30px;
+    .nav {
+        border-bottom: 0;
+        .nav-link {
+            border: 0;
+            margin-bottom: 0;
+            background: $white;
+            @include fontStyle(1.4rem, 400, $dark);
+            padding: 8.5px 25px;
+            border-radius: 0;
+            &:first-child {
+                border-top-left-radius: 8px;
+                border-bottom-left-radius: 8px;
+            }
+            &:last-child {
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+            }
+            &.active {
+                background: $themeColor;
+                color: $white;
+            }
+        }
+    }
+}

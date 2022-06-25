@@ -1,0 +1,80 @@
+
+.access__form__area,
+.access__thumb__area {
+    flex: 0 0 50%;
+    align-self: stretch;
+}
+
+.access__thumb__area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+    @include respond-below(lg) {
+        display: none;
+    }
+}
+
+.access__form__area {
+    padding: var(--padding-50);
+    position: relative;
+    @include respond-below(lg) {
+        flex: 1 1 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .access__header {
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        @include respond-below(xxl) {
+            top: 25px;
+            left: 25px;
+        }
+    }
+    .access__form__block {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 50px 125px;
+        height: 100%;
+        @include respond-below(xl) {
+            padding: 70px;
+        }
+        @include respond-below(sm) {
+            padding: 70px 0;
+        }
+        .access__form__title {
+            @include fontStyle(var(--h5-fontsize), 700, $dark);
+            margin-bottom: 25px;
+        }
+        .access__form {
+            width: 100%;
+        }
+        .alternate__access__wrap {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 15px;
+            @include respond-below(xs) {
+                display: block;
+                .reset__pass {
+                    margin-top: 5px;
+                }
+            }
+            .alternate__access,
+            .reset__pass {
+                @include fontStyle(1.4rem, 400, rgba($dark, .7));
+            }
+            .alternate__access {
+                a {
+                    @include fontStyle(1.4rem, 500, $dark);
+                }
+            }
+            .reset__pass {
+                &:hover {
+                    color: $dark;
+                }
+            }
+        }
+    }
+}
