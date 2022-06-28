@@ -4,7 +4,6 @@ import onlyAdmin from "@/app/middlewares/onlyAdmin";
 import onlyCustomer from "@/app/middlewares/onlyCostomer";
 
 
-
 const routes = [
     {
         path: '/',
@@ -39,15 +38,56 @@ const routes = [
         },
     },
     {
-        path: '/admin',
-        component: () => import('@/views/pages/admin/Index'),
-        name: 'admin.index',
+        path: '/admin/home',
+        component: () => import('@/views/pages/admin/home/Index'),
+        name: 'admin.home',
+        meta: {
+            middleware: [auth, onlyAdmin],
+        },
+    },
+    {
+        path: '/admin/coupons',
+        component: () => import('@/views/pages/admin/coupons/List'),
+        name: 'admin.coupons.list',
+        meta: {
+            middleware: [auth, onlyAdmin],
+        },
+    },
+    {
+        path: '/admin/coupons/create',
+        component: () => import('@/views/pages/admin/coupons/Form'),
+        name: 'admin.coupons.create',
+        meta: {
+            middleware: [auth, onlyAdmin],
+        },
+    },
+    {
+        path: '/admin/coupons/:id/edit',
+        component: () => import('@/views/pages/admin/coupons/Form'),
+        name: 'admin.coupons.edit',
+        meta: {
+            middleware: [auth, onlyAdmin],
+        },
+    },
+    {
+        path: '/admin/courses',
+        component: () => import('@/views/pages/admin/courses/List'),
+        name: 'admin.courses.list',
+        meta: {
+            middleware: [auth, onlyAdmin],
+        },
+    },
+    {
+        path: '/admin/courses/:id/details',
+        component: () => import('@/views/pages/admin/courses/Details'),
+        name: 'admin.courses.details',
         meta: {
             middleware: [auth, onlyAdmin],
         },
     }
 
-    ];
+
+];
 
 
 export default routes;

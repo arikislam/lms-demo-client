@@ -1,10 +1,12 @@
 <template>
- <h1> I am admin</h1>
+  <admin-layout>
+
+  </admin-layout>
 </template>
 
 <script>
 export default {
-  name: "AdminIndex"
+  name: "CourseList"
 }
 </script>
 
