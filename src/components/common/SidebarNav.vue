@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar__wrap" :class="{show: isSidebarOpen}">
     <div class="sidebar__header">
-      <a href="#" class="logo"><img src="/assets/img/site-logo.svg" alt=""></a>
+      <h1></h1>
       <a href="#" class="sidebar__toggler" @click="toggleSidebar"><i class="sv-icon sv-d-arrow"></i></a>
     </div>
     <nav class="sidebar">

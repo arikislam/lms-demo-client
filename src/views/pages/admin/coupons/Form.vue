@@ -15,14 +15,16 @@
           <div class="col-6">
             <div class="form__group">
               <label for="">Label</label>
-              <input type="text" class="form__control">
-<!--              <error-message :message="errorMessages.password"></error-message>-->
+              <input type="text" class="form__control" name="label" v-model="form.label">
+              <error-message :message="errorMessages.label"></error-message>
             </div>
           </div>
           <div class="col-6">
             <div class="form__group">
               <label for="">Code</label>
-              <input type="text" class="form__control">
+              <input type="text" class="form__control" name="code" v-model="form.code">
+              <error-message :message="errorMessages.code"></error-message>
+
             </div>
           </div>
           <div class="col-md-6">
@@ -30,50 +32,60 @@
               <label for="">Discount Type</label>
               <div class="sv-select">
 
-                <select class="form__control">
-                  <option value="">Products</option>
-                  <option value="">Product Categories</option>
+                <select class="form__control" name="discount_type" v-model="form.discount_type">
+                  <option v-for="(discount, index) in couponDiscountTypes" :value="discount.value" :key="index">
+                    {{ discount.label }}
+                  </option>
                 </select>
               </div>
+              <error-message :message="errorMessages.discount_type"></error-message>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form__group">
               <label for="">Discount amount</label>
-              <input type="text" class="form__control">
+              <input type="text" class="form__control" name="discount_amount" v-model="form.discount_amount">
+              <error-message :message="errorMessages.discount_amount"></error-message>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form__group">
               <label for="">Expire Date</label>
-              <input type="date" class="form__control">
+              <input type="date" class="form__control" v-model="form.expire_date">
+              <error-message :message="errorMessages.expire_date"></error-message>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form__group">
               <label for="">Coupon Applied On</label>
               <div class="sv-select">
-
-                <select class="form__control">
-                  <option value="">Products</option>
-                  <option value="">Product Categories</option>
+                <select class="form__control" v-model="form.coupon_applied_on">
+                  <option v-for="(coupon, index) in couponAppliedOn" :value="coupon.value" :key="index">
+                    {{ coupon.label }}
+                  </option>
                 </select>
               </div>
+              <error-message :message="errorMessages.coupon_applied_on"></error-message>
+
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" v-if="form.coupon_applied_on == 2">
             <div class="form__group">
               <label for="">Product Category</label>
               <Multiselect class="form__control"
                            v-model="categoryValue"
                            placeholder="Search and choose course category"
                            :searchable="true"
-                           :options="categoryOptions"
-                           @select="checkValue"
+                           :min-chars="0"
+                           :resolve-on-load="false"
+                           :delay="2"
+                           :options="async function (query){return await returnCategories(query)}"
+                           @select="setCategory(value)"
               />
             </div>
+            <error-message :message="errorMessages.product_category_id"></error-message>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" v-if="form.coupon_applied_on == 1">
             <div class="form__group">
               <label for="">Products</label>
 
@@ -84,18 +96,19 @@
                   placeholder="Search your courses"
                   :close-on-select="false"
                   :filter-results="false"
-                  :min-chars="1"
+                  :min-chars="0"
                   :resolve-on-load="false"
-                  :delay="0"
+                  :delay="2"
                   :searchable="true"
                   :object="true"
-                  @select="checkValue"
-                  :options="async function (query){return await returnProducts(query)}"
+                  :options="async function (query){ return await returnProducts(query)}"
               >
               </Multiselect>
+              <error-message :message="errorMessages.products"></error-message>
+
             </div>
           </div>
-          <div class="col-12">
+          <div class="col-12" v-if="form.coupon_applied_on == 1">
             <table class="table">
               <thead>
               <tr>
@@ -106,7 +119,7 @@
               </thead>
               <tbody>
               <tr v-for="(p, index) in productValues" :key="index">
-                <th scope="row"> {{ index+1 }}</th>
+                <th scope="row"> {{ index + 1 }}</th>
                 <td>{{ p.label }}</td>
                 <td>
                   <a href='' @click.prevent="removeProduct(p)"> <i class="sv-icon sv-trash"></i></a>
@@ -114,13 +127,10 @@
               </tr>
               </tbody>
             </table>
-<!--            <ul>-->
-<!--              <li v-for="(p, index) in productValues" :key="index"> {{ p.label }}</li>-->
-<!--            </ul>-->
           </div>
 
           <div class="button__group">
-            <button class="button button__themeColor" @click="checkValue">Save Changes</button>
+            <button class="button button__themeColor" @click="submitData">Save Changes</button>
           </div>
         </div>
       </div>
@@ -135,54 +145,108 @@ export default {
 </script>
 
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import Multiselect from '@vueform/multiselect'
+import httpClient from "@/app/api/client";
+import {failedNotification, serializeValidationMessage, successNotification} from "@/app/extra/helper";
+import {useRouter} from "vue-router";
 
 let pageTitle = ref('Create New Coupon');
-let DataOptions = [{
-  value: 1,
-  label: 'One'
-}, {
-  value: 2,
-  label: 'My Name is very very Large'
-},
-  {
-    value: 3,
-    label: 'My Name is very very Large My Name is very very Large My Name is very very Large'
-  }, {
-    value: 4,
-    label: 'My Name is very very Large My Name is very very Large My Name is very very Large My Name is very very Large'
-  },
-  {
-    value: 5,
-    label: 'My Name is very very Large My Name is very very Large My Name is very very Large My Name is very very Large'
-  }, {
-    value: 6,
-    label: 'Two'
-  }
-]
-
 let categoryValue = ref([])
-let categoryOptions = ref(DataOptions);
+let productValues = ref([])
 
-let productValues = ref([{
-  value: 6,
-  label: 'Two'
-}])
-
-let productOptions = ref(DataOptions);
-const checkValue = (asd) => {
-  console.log(asd, productValues.value);
+let formData = {
+  label: "",
+  code: "",
+  coupon_applied_on: 1,
+  discount_type: 1,
+  expire_date: null,
+  status: true,
+  discount_amount: 0,
+  product_category_id: null,
+  products: []
 }
 
-const returnProducts = async (query) => {
-  let data = await productOptions.value;
-  return data;
+let form = ref(formData)
+let errorMessages = ref({
+  label: "",
+  code: "",
+  coupon_applied_on: "",
+  discount_type: "",
+  expire_date: "",
+  status: "",
+  discount_amount: "",
+  product_category_id: "",
+  products: ""
+})
+const router = useRouter()
+
+// let productOptions = ref([]);
+const submitData = async () => {
+
+  form.value.products = productValues.value.map(product => product.value)
+  form.value.product_category_id = categoryValue.value
+  try {
+    await httpClient.post('coupons/create', form.value)
+    successNotification('Coupon created')
+    await router.push({name: 'admin.coupons.list'})
+
+  } catch ({response: {data: {message}, status}}) {
+    if (status && status === 422) {
+      errorMessages.value = await serializeValidationMessage(message);
+    } else {
+      failedNotification(message);
+    }
+
+  }
+
+}
+
+const returnProducts = async (query = '') => {
+  try {
+    let {data: {data}} = await httpClient.get('courses/search?keyword=' + query)
+    return data
+  } catch (e) {
+    console.log(e)
+    return []
+  }
+}
+
+const returnCategories = async (query = '') => {
+  try {
+    let {data: {data}} = await httpClient.get('courses/search-categories?keyword=' + query)
+    return data
+  } catch (e) {
+    console.log(e)
+    return []
+  }
 }
 
 const removeProduct = (product) => {
-  productValues.value = productValues.value.filter( p => p.value !==  product.value);
+  productValues.value = productValues.value.filter(p => p.value !== product.value);
 }
+
+let couponAppliedOn = ref([])
+let couponDiscountTypes = ref([])
+
+const getSearchParams = async () => {
+  try {
+    let {data: {data: {coupon_applied_on, coupon_discount_types}}} = await httpClient('coupons/search-parameters')
+    couponAppliedOn.value = coupon_applied_on;
+    couponDiscountTypes.value = coupon_discount_types;
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+const setCategory = (value) => {
+  form.value.product_category_id = value;
+}
+
+onMounted(() => {
+  getSearchParams()
+})
+
 </script>
 
 <style scoped>
