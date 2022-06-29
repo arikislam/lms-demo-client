@@ -84,7 +84,12 @@ const routes = [
         meta: {
             middleware: [auth, onlyAdmin],
         },
-    }
+    },
+    {
+        path: '/:catchAll(.*)',
+        component: () => import('@/views/pages/PageNotFound'),
+        name: 'notFound',
+    },
 
 
 ];
