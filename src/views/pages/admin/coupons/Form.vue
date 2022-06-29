@@ -149,9 +149,12 @@ import {onMounted, ref} from "vue";
 import Multiselect from '@vueform/multiselect'
 import httpClient from "@/app/api/client";
 import {failedNotification, serializeValidationMessage, successNotification} from "@/app/extra/helper";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
-let pageTitle = ref('Create New Coupon');
+const router = useRouter()
+const route = useRoute()
+
+let pageTitle = ref(route.name === 'admin.coupons.edit' ? 'Update Coupon' : 'Create New Coupon');
 let categoryValue = ref([])
 let productValues = ref([])
 
@@ -179,16 +182,18 @@ let errorMessages = ref({
   product_category_id: "",
   products: ""
 })
-const router = useRouter()
 
-// let productOptions = ref([]);
 const submitData = async () => {
 
   form.value.products = productValues.value.map(product => product.value)
   form.value.product_category_id = categoryValue.value
+
+
+  let url = (route.name === 'admin.coupons.edit') ? `coupons/${route.params.id}/update` : 'coupons/create'
+
   try {
-    await httpClient.post('coupons/create', form.value)
-    successNotification('Coupon created')
+    await httpClient.post(url, form.value)
+    successNotification((route.name === 'admin.coupons.edit') ? 'Coupon updated': 'Coupon created')
     await router.push({name: 'admin.coupons.list'})
 
   } catch ({response: {data: {message}, status}}) {
@@ -212,6 +217,13 @@ const returnProducts = async (query = '') => {
   }
 }
 
+const removeProduct = (product) => {
+  productValues.value = productValues.value.filter(p => p.value !== product.value);
+}
+
+let couponAppliedOn = ref([])
+let couponDiscountTypes = ref([])
+
 const returnCategories = async (query = '') => {
   try {
     let {data: {data}} = await httpClient.get('courses/search-categories?keyword=' + query)
@@ -221,17 +233,9 @@ const returnCategories = async (query = '') => {
     return []
   }
 }
-
-const removeProduct = (product) => {
-  productValues.value = productValues.value.filter(p => p.value !== product.value);
-}
-
-let couponAppliedOn = ref([])
-let couponDiscountTypes = ref([])
-
 const getSearchParams = async () => {
   try {
-    let {data: {data: {coupon_applied_on, coupon_discount_types}}} = await httpClient('coupons/search-parameters')
+    let {data: {data: {coupon_applied_on, coupon_discount_types}}} = await httpClient.get('coupons/search-parameters')
     couponAppliedOn.value = coupon_applied_on;
     couponDiscountTypes.value = coupon_discount_types;
   } catch (e) {
@@ -243,8 +247,33 @@ const setCategory = (value) => {
   form.value.product_category_id = value;
 }
 
-onMounted(() => {
-  getSearchParams()
+const getCouponDetails = async () => {
+  try {
+    let {data: {data}} = await httpClient.get('coupons/' + route.params.id + '/details')
+    console.log(data);
+    form.value.code = data.code
+    form.value.label = data.label
+    form.value.coupon_applied_on = data.coupon_applied_on
+    form.value.discount_amount = data.discount_amount
+    form.value.discount_type = data.discount_type
+    form.value.expire_date = new Date(data.expire_date).toISOString().split('T')[0]
+    productValues.value = data.product_details.map(product => {
+      return {
+        value: product.id,
+        label: product.name
+      }
+    })
+  } catch (e) {
+    console.log(e);
+  }
+
+}
+
+onMounted(async () => {
+  await getSearchParams()
+  if (route.name === 'admin.coupons.edit') {
+    await getCouponDetails()
+  }
 })
 
 </script>
