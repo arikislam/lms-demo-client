@@ -1,7 +1,6 @@
 import {mapValues, last, first, values, isNull, isEmpty} from 'lodash';
 import Cookie from 'js-cookie';
 import {useToast} from "vue-toastification";
-
 // import app from "@/main";
 
 export const getCookie = function (name) {
@@ -87,7 +86,7 @@ export function successNotification(message, timeOut = 2000) {
     toast.success(message, {
         timeout: timeOut
     });
-    return { toast }
+    return {toast}
 }
 
 
@@ -97,7 +96,7 @@ export function failedNotification(message, timeOut = 2000) {
     toast.error(message, {
         timeout: timeOut
     });
-    return { toast }
+    return {toast}
 }
 
 export function warningNotification(message, timeOut = 2000) {
@@ -106,5 +105,5 @@ export function warningNotification(message, timeOut = 2000) {
     toast.warning(message, {
         timeout: timeOut
     });
-    return { toast }
+    return {toast}
 }

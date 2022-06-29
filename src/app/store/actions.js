@@ -33,7 +33,7 @@ export default {
 
     [USER_LOGGED_OUT]({ commit }) {
         commit(RESET_USER)
-        _helper.removeCookie('mdpos_token')
+        _helper.removeCookie('lms-demo')
     },
 
     [UPDATE_USER_DATA]({ commit }) {

@@ -29,9 +29,8 @@ export default {
     [RESET_USER](state) {
         state.user = null
         state.token = null
-        state.menu = []
         state.expiry = null
-        state.access = []
+        state.isAdmin = false
     },
 
     [SET_AUTH_TOKEN](state, token) {
