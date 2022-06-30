@@ -62,7 +62,7 @@
           </p>
         </div>
         <div class="table__col col__action">
-          <router-link :to="{name:'admin.coupons.edit', params: {id: coupon.id}}"  class="action__edit"> <i class="sv-icon sv-pencil-alt"></i></router-link>
+          <router-link :to="{name:'admin.coupons.edit', params: {id: coupon.id}}"  class="action__edit"> <i class="sv-icon sv-pencil-alt"></i>Edit</router-link>
         </div>
       </div>
     </div>

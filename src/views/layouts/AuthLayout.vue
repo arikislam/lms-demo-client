@@ -3,7 +3,7 @@
     <div class="access__form__area">
       <div class="access__header">
         <div class="site__logo">
-          <router-link :to="{name: 'home'}"><img src="/assets/img/logo-black.svg" alt="LMS"></router-link>
+          <router-link :to="{name: 'admin.home'}"><img src="/assets/img/logo-black.svg" alt="LMS"></router-link>
         </div>
       </div>
       <slot></slot>

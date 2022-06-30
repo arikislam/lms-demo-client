@@ -1,6 +1,24 @@
 <template>
   <auth-layout>
     <div class="access__form__block">
+      <div class="sv-table">
+        <h2 style="color: red">Credentials </h2>
+        <hr>
+        <table class="table table-sm">
+          <thead>
+          <tr>
+            <th scope="col">User</th>
+            <th scope="col"> <code>admin@admin.com</code></th>
+          </tr>
+          <tr>
+            <th scope="col">Password</th>
+            <th scope="col"> <code>password</code></th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+      <br>
+      <br>
       <h2 class="access__form__title">Login</h2>
       <form @submit.prevent="" class="access__form">
         <div class="form__group">
@@ -10,7 +28,6 @@
         <div class="form__group">
           <input type="password" class="form__control" placeholder="Password*" v-model="form.password">
           <error-message :message="errorMessages.password"></error-message>
-
         </div>
         <submit-button
             :loading="loading"

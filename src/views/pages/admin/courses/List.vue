@@ -53,7 +53,7 @@
 
         <div class="table__col col__action">
             <router-link :to="{name:'admin.courses.details', params: {id: course.id}}" class="action__edit"><i
-                      class="sv-icon sv-pencil-alt"></i></router-link>
+                      class="sv-icon sv-pencil-alt"></i> Test coupons</router-link>
         </div>
       </div>
 

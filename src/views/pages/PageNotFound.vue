@@ -709,6 +709,18 @@ export default {
 }
 </script>
 
+<script setup>
+ import {onMounted} from "vue";
+ import {useRouter} from "vue-router";
+const router = useRouter()
+
+ onMounted(  () => {
+   setTimeout(() => {
+     router.push({name: 'admin.home'})
+   }, 200);
+ })
+</script>
+
 <style scoped>
 
 </style>

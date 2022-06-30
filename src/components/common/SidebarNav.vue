@@ -1,7 +1,10 @@
 <template>
   <div class="sidebar__wrap" :class="{show: isSidebarOpen}">
     <div class="sidebar__header">
-      <h1></h1>
+      <div class="site__logo">
+
+        <router-link :to="{name: 'admin.home'}" class="logo"><img src="/assets/img/sidebar-log.svg" alt=""></router-link>
+      </div>
       <a href="#" class="sidebar__toggler" @click="toggleSidebar"><i class="sv-icon sv-d-arrow"></i></a>
     </div>
     <nav class="sidebar">
