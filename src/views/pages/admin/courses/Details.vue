@@ -98,6 +98,7 @@ let couponCode = ref('')
 let result = ref(null)
 
 const applyCoupon = async () => {
+  result = null;
   let formData = {
     coupon_code: couponCode.value
   }
