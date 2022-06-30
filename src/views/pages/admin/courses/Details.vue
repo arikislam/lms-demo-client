@@ -37,7 +37,7 @@
 
         <tr>
           <th scope="row">Apply Coupon</th>
-          <td colspan="2"><input type="text" placeholder="Type coupon" v-model="couponCode"> <a href="#" @click.prevent="applyCoupon"> Apply</a></td>
+          <td colspan="2"><input type="text" placeholder="Type coupon" v-model="couponCode"> <a href="#"  class="button button__black" @click.prevent="applyCoupon"> Apply</a></td>
         </tr>
         </tbody>
       </table>
@@ -98,7 +98,7 @@ let couponCode = ref('')
 let result = ref(null)
 
 const applyCoupon = async () => {
-  result = null;
+  result.value = null;
   let formData = {
     coupon_code: couponCode.value
   }
