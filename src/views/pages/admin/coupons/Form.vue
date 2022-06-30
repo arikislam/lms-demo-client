@@ -79,6 +79,7 @@
                            :min-chars="0"
                            :resolve-on-load="false"
                            :delay="2"
+                           :object="true"
                            :options="async function (query){return await returnCategories(query)}"
                            @select="setCategory(value)"
               />
@@ -186,14 +187,14 @@ let errorMessages = ref({
 const submitData = async () => {
 
   form.value.products = productValues.value.map(product => product.value)
-  form.value.product_category_id = categoryValue.value
+  form.value.product_category_id = categoryValue.value.value
 
 
   let url = (route.name === 'admin.coupons.edit') ? `coupons/${route.params.id}/update` : 'coupons/create'
 
   try {
     await httpClient.post(url, form.value)
-    successNotification((route.name === 'admin.coupons.edit') ? 'Coupon updated': 'Coupon created')
+    successNotification((route.name === 'admin.coupons.edit') ? 'Coupon updated' : 'Coupon created')
     await router.push({name: 'admin.coupons.list'})
 
   } catch ({response: {data: {message}, status}}) {
@@ -244,13 +245,12 @@ const getSearchParams = async () => {
 }
 
 const setCategory = (value) => {
-  form.value.product_category_id = value;
+  form.value.product_category_id = value.value;
 }
 
 const getCouponDetails = async () => {
   try {
     let {data: {data}} = await httpClient.get('coupons/' + route.params.id + '/details')
-    console.log(data);
     form.value.code = data.code
     form.value.label = data.label
     form.value.coupon_applied_on = data.coupon_applied_on
@@ -263,6 +263,15 @@ const getCouponDetails = async () => {
         label: product.name
       }
     })
+
+    if(data.product_category_id) {
+      categoryValue.value = {
+        value: data.product_category_id,
+        label: data.product_category_name
+
+      }
+    }
+
   } catch (e) {
     console.log(e);
   }
